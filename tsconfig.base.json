@@ -14,7 +14,14 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@TulpReizen2/backend/dto": ["libs/backend/dto/src/index.ts"],
+      "@TulpReizen2/backend/features": ["libs/backend/features/src/index.ts"],
+      "@TulpReizen2/shared/api": ["libs/shared/api/src/index.ts"],
+      "@tulp-reizen2/common": ["libs/frontend/common/src/index.ts"],
+      "@tulp-reizen2/features": ["libs/frontend/features/src/index.ts"],
+      "@tulp-reizen2/ui": ["libs/frontend/ui/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
