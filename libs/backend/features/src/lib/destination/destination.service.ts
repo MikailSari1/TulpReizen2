@@ -1,5 +1,5 @@
 import {Injectable, Logger, NotFoundException} from '@nestjs/common';
-import {Activities, IDestination} from '@TulpReizen2/shared/api';
+import {Activities, IDestination, IGuide} from '@TulpReizen2/shared/api';
 import {BehaviorSubject} from 'rxjs';
 
 @Injectable()
@@ -88,5 +88,34 @@ export class DestinationService {
     };
     this.destinations$.next([...current, newDestination]);
     return newDestination;
+  }
+
+  delete(id: string): void {
+    Logger.log(`delete(${id})`, this.TAG);
+    const current = this.destinations$.value;
+    const updated = current.filter((destination) => destination.id !== id);
+    if (current.length === updated.length) {
+      throw new NotFoundException(`destination could not be found!`);
+    }
+    this.destinations$.next(updated);
+  }
+
+  update(id: string, destination: Pick<IDestination, 'location' >): IDestination {
+    Logger.log(`update(${id})`, this.TAG);
+    const currentDestinations = this.destinations$.value;
+    const destinationIndex = currentDestinations.findIndex((destination) => destination.id === id);
+
+    if (destinationIndex === -1) {
+      throw new NotFoundException(`Destination with ID ${id} not found`);
+    }
+    const updatedDestination = {
+      ...currentDestinations[destinationIndex],
+      ...destination,
+    };
+
+    currentDestinations[destinationIndex] = updatedDestination;
+    this.destinations$.next([...currentDestinations]);
+
+    return updatedDestination;
   }
 }

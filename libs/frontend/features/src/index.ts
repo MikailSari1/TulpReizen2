@@ -11,3 +11,5 @@ export * from './lib/destination/destination.service';
 export * from './lib/guides/guide.component'
 export * from './lib/guides/guide.service'
 export * from './lib/guides/editGuide/edit-guide.component'
+export * from './lib/guides/createGuide/create-guide.component'
+export * from './lib/destination/editDestination/edit-destination.component'

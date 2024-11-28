@@ -129,7 +129,7 @@ export class GuideService {
     const guideIndex = currentGuides.findIndex((guide) => guide.id === id);
 
     if (guideIndex === -1) {
-      throw new NotFoundException(`Workout with ID ${id} not found`);
+      throw new NotFoundException(`Guide with ID ${id} not found`);
     }
     const updatedGuide = {
       ...currentGuides[guideIndex],

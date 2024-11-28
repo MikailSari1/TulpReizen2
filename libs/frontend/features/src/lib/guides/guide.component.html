@@ -1,21 +1,23 @@
-
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-  <div *ngFor="let guide of guides" class="bg-white shadow-lg rounded-lg p-8 transform transition duration-500 hover:scale-105">
+<div class="flex justify-end p-6">
+  <button [routerLink]="['/guides/create']" class="bg-green-500 text-white py-2 px-4 rounded-lg">Create</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-6 mt-12">
+  <div *ngFor="let guide of guides" class="bg-white shadow-lg rounded-lg p-4 transform transition duration-500 hover:scale-105 max-w-md mx-auto">
     <div class="flex justify-center">
-      <div class="w-24 h-24 rounded-full bg-blue-200 flex items-center justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div class="w-16 h-16 rounded-full bg-blue-200 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12c2.667 0 4-1.333 4-4S14.667 4 12 4s-4 1.333-4 4 1.333 4 4 4zM8 14c-2.667 0-4 1.333-4 4h16c0-2.667-1.333-4-4-4H8z" />
         </svg>
       </div>
     </div>
-    <p class="text-gray-700 mt-6 text-center text-lg">
+    <p class="text-gray-700 mt-4 text-center text-md">
       {{ guide.description }}
     </p>
-    <h3 class="mt-6 text-2xl font-bold text-blue-600 text-center">{{ guide.location }}</h3>
-    <p class="text-md text-gray-500 text-center">{{ guide.activities }}</p>
-    <div class="flex justify-center mt-6">
-        <button routerLink="/guides/{{guide.id}}/edit" class="bg-blue-500 text-white py-3 px-6 rounded-lg mr-3 visible">Edit</button>
-      <button (click)="deleteGuide(guide.id)" class="bg-red-500 text-white py-3 px-6 rounded-lg">Delete</button>
+    <h3 class="mt-4 text-xl font-bold text-blue-600 text-center">{{ guide.location }}</h3>
+    <p class="text-sm text-gray-500 text-center">{{ guide.activities }}</p>
+    <div class="flex justify-center mt-4">
+      <button routerLink="/guides/{{guide.id}}/edit" class="bg-blue-500 text-white py-2 px-4 rounded-lg mr-2">Edit</button>
+      <button (click)="deleteGuide(guide.id)" class="bg-red-500 text-white py-2 px-4 rounded-lg">Delete</button>
     </div>
   </div>
 </div>

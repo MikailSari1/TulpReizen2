@@ -6,6 +6,8 @@ import {RouterLink, RouterModule} from "@angular/router";
 import {GuideComponent} from "./guides/guide.component";
 import {EditGuideComponent} from "./guides/editGuide/edit-guide.component";
 import {FormsModule} from "@angular/forms";
+import {CreateGuideComponent} from "./guides/createGuide/create-guide.component";
+import {EditDestinationComponent} from "./destination/editDestination/edit-destination.component";
 
 
 
@@ -21,7 +23,9 @@ import {FormsModule} from "@angular/forms";
     declarations: [
          DestinationListComponent,
          GuideComponent,
-         EditGuideComponent ],
+         EditGuideComponent,
+         CreateGuideComponent,
+         EditDestinationComponent ],
   providers: [],
 
 })

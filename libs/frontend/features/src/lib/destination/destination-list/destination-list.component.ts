@@ -27,4 +27,12 @@ export class DestinationListComponent implements OnInit, OnDestroy{
   ngOnDestroy() {
     this.subscription?.unsubscribe();
   }
+
+  deleteDestination(id: string): void {
+    if (this.destinations) {
+      this.destinationService.delete(id).subscribe(() => {
+        this.destinations = this.destinations!.filter(destination => destination.id !== id);
+      });
+    }
+  }
 }
