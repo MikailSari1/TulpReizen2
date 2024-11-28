@@ -2,5 +2,5 @@ import { IEnvironment } from './environment.interface';
 
 export const environment: IEnvironment = {
   production: false,
-  dataApiUrl: 'https://lively-bush-06c3ab403.5.azurestaticapps.net',
+  dataApiUrl: 'https://tulpreizen2-e4dca4a9bef3ctcq.westeurope-01.azurewebsites.net',
 }
