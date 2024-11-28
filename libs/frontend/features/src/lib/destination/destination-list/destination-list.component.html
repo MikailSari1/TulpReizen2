@@ -42,11 +42,11 @@
 
   <div class="mt-8 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto px-4">
     <!-- Card 1 -->
-    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+    <div *ngFor="let destination of destinations" class="bg-white rounded-lg shadow-lg overflow-hidden">
       <img class="w-full h-56 object-cover" src="https://example.com/bali.jpg" alt="Bali">
       <div class="p-6">
-        <h2 class="text-2xl font-bold text-gray-900">Bali</h2>
-        <p class="text-sm text-gray-500 mb-4">Tempels, rijstvelden en serene stranden.</p>
+        <h2 class="text-2xl font-bold text-gray-900">{{destination.location}}</h2>
+        <p class="text-sm text-gray-500 mb-4">{{ destination.description }}</p>
         <p class="text-gray-600 mb-6">
           Beleef de magie van Bali: een eiland vol tempels, groene rijstvelden en serene stranden. Geniet van yoga retreats, authentieke Balinese keuken en het bruisende nachtleven van Seminyak.
         </p>
@@ -57,7 +57,7 @@
     </div>
 
     <!-- Card 2 -->
-    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+   <!-- <div class="bg-white rounded-lg shadow-lg overflow-hidden">
       <img class="w-full h-56 object-cover" src="https://example.com/bahamas.jpg" alt="Bahama's">
       <div class="p-6">
         <h2 class="text-2xl font-bold text-gray-900">Bahama's</h2>
@@ -71,7 +71,7 @@
       </div>
     </div>
 
-    <!-- Card 3 -->
+    &lt;!&ndash; Card 3 &ndash;&gt;
     <div class="bg-white rounded-lg shadow-lg overflow-hidden">
       <img class="w-full h-56 object-cover" src="https://example.com/santorini.jpg" alt="Santorini">
       <div class="p-6">
@@ -84,7 +84,7 @@
           Ontdek meer
         </a>
       </div>
-    </div>
+    </div>-->
   </div>
 </section>
 

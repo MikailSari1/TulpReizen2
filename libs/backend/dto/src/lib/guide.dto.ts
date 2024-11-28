@@ -6,9 +6,9 @@ import {
   IsDate
 } from 'class-validator';
 import {
-  ICreateDestination,
-  IUpdateDestination,
-  IUpsertDestination,
+  ICreateGuide,
+  IUpdateGuide,
+  IUpsertGuide,
   Activities
 } from '@TulpReizen2/shared/api';
 import {Id} from "@TulpReizen2/shared/api";
@@ -17,7 +17,7 @@ import {Id} from "@TulpReizen2/shared/api";
  * Use the `Pick` utility type to extract only the properties we want for
  * new to-do items
  */
-export class CreateDestinationDto implements ICreateDestination {
+export class CreateGuideDto implements ICreateGuide {
   @IsString()
   @IsNotEmpty()
   location!: string;
@@ -32,7 +32,7 @@ export class CreateDestinationDto implements ICreateDestination {
 
 }
 
-export class UpsertDestinationDto implements IUpsertDestination {
+export class UpsertGuideDto implements IUpsertGuide {
   @IsString()
   @IsNotEmpty()
   location!: string;
@@ -47,7 +47,7 @@ export class UpsertDestinationDto implements IUpsertDestination {
 
 }
 
-export class UpdateDestinationDto implements IUpdateDestination {
+export class UpdateGuideDto implements IUpdateGuide {
   @IsString()
   @IsOptional()
   id!: Id;

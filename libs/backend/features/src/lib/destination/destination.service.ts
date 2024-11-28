@@ -13,7 +13,50 @@ export class DestinationService {
       description: 'Beautiful place where the best sunset prevails.',
       activities: Activities.Clubbing,
     },
+    {
+      id: '1',
+      location: 'Kyoto',
+      description: 'A serene city filled with traditional temples and cherry blossoms.',
+      activities: Activities.CulturalTours,
+    },
+    {
+      id: '2',
+      location: 'Queenstown',
+      description: 'Adventure capital surrounded by stunning mountain landscapes.',
+      activities: Activities.AdventureSports,
+    },
+    {
+      id: '3',
+      location: 'Santorini',
+      description: 'Famous for its white-washed houses and crystal-clear Aegean waters.',
+      activities: Activities.Relaxation,
+    },
+    {
+      id: '4',
+      location: 'Reykjavik',
+      description: 'Gateway to Iceland’s otherworldly landscapes and northern lights.',
+      activities: Activities.Exploration,
+    },
+    {
+      id: '5',
+      location: 'Cape Town',
+      description: 'A vibrant city with stunning beaches and the iconic Table Mountain.',
+      activities: Activities.Hiking,
+    },
+    {
+      id: '6',
+      location: 'Marrakech',
+      description: 'A bustling city with colorful souks and rich Moroccan culture.',
+      activities: Activities.Shopping,
+    },
+    {
+      id: '7',
+      location: 'Maldives',
+      description: 'Tropical paradise with luxurious overwater bungalows.',
+      activities: Activities.Watersports,
+    },
   ]);
+
 
   getAll(): IDestination[] {
     Logger.log('getAll', this.TAG);
