@@ -29,8 +29,8 @@ jobs:
 
       - name: Zip artifacts for deployment
         run: |
-          echo ${GITHUB_WORKSPACE}
-          cd ${GITHUB_WORKSPACE}/dist/apps/data-api/ && zip ${GITHUB_WORKSPACE}/data-api-release.zip ./* -r
+          echo C:/Users/mikai/WebstormProjects/TulpReizen2/TulpReizen2/
+          cd C:/Users/mikai/WebstormProjects/TulpReizen2/TulpReizen2/apps/data-api && zip C:/Users/mikai/WebstormProjects/TulpReizen2/TulpReizen2/apps/data-api-release.zip ./* -r
           cd ${GITHUB_WORKSPACE}/dist/apps/TulpReizen2-web/ && zip ${GITHUB_WORKSPACE}/TulpReizen2-web-release.zip ./* -r
 
       - name: Upload TulpReizen2 artifact for deployment job
