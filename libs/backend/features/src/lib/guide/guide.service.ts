@@ -99,4 +99,14 @@ export class GuideService {
     this.guides$.next([...current, newGuide]);
     return newGuide;
   }
+
+  delete(id: string): void {
+    Logger.log(`delete(${id})`, this.TAG);
+    const current = this.guides$.value;
+    const updated = current.filter((guide) => guide.id !== id);
+    if (current.length === updated.length) {
+      throw new NotFoundException(`guide could not be found!`);
+    }
+    this.guides$.next(updated);
+  }
 }

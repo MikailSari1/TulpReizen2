@@ -18,7 +18,7 @@ export const httpOptions = {
  */
 @Injectable()
 export class GuideService {
-  endpoint = 'http://localhost:3000/api/guides';
+  endpoint = 'http://localhost:3000/api/guide';
 
   constructor(private readonly http: HttpClient) {}
 
@@ -67,5 +67,18 @@ export class GuideService {
     console.log('handleError in GuideService', error);
 
     return throwError(() => new Error(error.message));
+  }
+
+  public delete(id: string | null, options?: any): Observable<void> {
+    console.log(`delete ${this.endpoint}`);
+    return this.http
+      .delete<void>(`${this.endpoint}/${id}`, {
+        ...options,
+        ...httpOptions,
+      })
+      .pipe(
+        tap(() => console.log(`Deleted item with id: ${id}`)),
+        catchError(this.handleError)
+      );
   }
 }

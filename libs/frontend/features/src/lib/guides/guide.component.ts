@@ -27,4 +27,18 @@ export class GuideComponent implements OnInit, OnDestroy{
   ngOnDestroy() {
     this.subscription?.unsubscribe();
   }
+
+  loadGuides(): void {
+    this.guideService.list().subscribe((guides) => {
+      this.guides = guides || [];
+    });
+  }
+
+  deleteGuide(id: string): void {
+    if (this.guides) {
+      this.guideService.delete(id).subscribe(() => {
+        this.guides = this.guides!.filter(guide => guide.id !== id);
+      });
+    }
+  }
 }
