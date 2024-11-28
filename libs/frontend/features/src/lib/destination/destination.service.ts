@@ -94,4 +94,21 @@ export class DestinationService {
         catchError(this.handleError)
       );
   }
+
+  public create(data: IDestination | null, options?: any): Observable<IDestination> {
+    console.log(`create ${this.endpoint}`);
+
+    return this.http
+      .post<ApiResponse<IDestination>>(this.endpoint, data, {
+        ...options,
+        /*
+                ...httpOptions,
+         */
+      })
+      .pipe(
+        tap(console.log),
+        map((response: any) => response.results as IGuide),
+        catchError(this.handleError)
+      );
+  }
 }

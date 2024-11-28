@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 import {
-  AboutComponent, AccomodationsComponent, CreateGuideComponent,
+  AboutComponent, AccomodationsComponent, CreateDestinationComponent, CreateGuideComponent,
   DestinationListComponent, EditDestinationComponent, EditGuideComponent, GuideComponent, HomeComponent
 } from "@tulp-reizen2/features";
 import {
@@ -20,5 +20,6 @@ export const appRoutes: Route[] = [
   { path: 'guides', component: GuideComponent},
   { path: 'guides/:id/edit', component: EditGuideComponent},
   { path: 'guides/create', component: CreateGuideComponent },
-  { path: 'destination/:id/edit', component: EditDestinationComponent }
+  { path: 'destination/:id/edit', component: EditDestinationComponent },
+  { path: 'destination/create', component: CreateDestinationComponent }
 ];

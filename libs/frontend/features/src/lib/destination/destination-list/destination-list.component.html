@@ -1,95 +1,69 @@
 <body class="bg-gray-100">
-<!-- Search Bar Section -->
-<div class="bg-white py-6 px-4 shadow">
-  <div class="max-w-7xl mx-auto flex items-center space-x-4">
-    <input
-      type="text"
-      placeholder="Keywords"
-      class="w-full border border-gray-300 rounded-lg p-3 focus:ring focus:ring-yellow-500"
-    />
-    <input
-      type="text"
-      placeholder="Location"
-      class="w-full border border-gray-300 rounded-lg p-3 focus:ring focus:ring-yellow-500"
-    />
-    <button class="p-3 rounded-full bg-green-500 text-white hover:bg-green-600">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-5 w-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M8 16l-4-4m0 0l4-4m-4 4h16"
-        />
-      </svg>
-    </button>
-  </div>
-</div>
-
-<!-- Categories Section -->
-<section class="py-10">
-  <div class="max-w-7xl mx-auto text-center">
-    <h2 class="text-3xl font-bold text-gray-800">Top Categories</h2>
-    <p class="text-gray-500 mt-2">
-      Explore the most popular categories.
-    </p>
+  <!-- Create Button -->
+  <div class="flex justify-end p-4">
+    <button routerLink="/destination/create" class="bg-green-500 text-white py-2 px-4 rounded-lg">Create</button>
   </div>
 
-  <div class="mt-8 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto px-4">
-    <!-- Card 1 -->
-    <div *ngFor="let destination of destinations" class="bg-white rounded-lg shadow-lg overflow-hidden">
-      <img class="w-full h-56 object-cover" src="https://example.com/bali.jpg" alt="Bali">
-      <div class="p-6">
-        <h2 class="text-2xl font-bold text-gray-900">{{destination.location}}</h2>
-        <p class="text-sm text-gray-500 mb-4">{{ destination.description }}</p>
-        <p class="text-gray-600 mb-6">
-          Beleef de magie van Bali: een eiland vol tempels, groene rijstvelden en serene stranden. Geniet van yoga retreats, authentieke Balinese keuken en het bruisende nachtleven van Seminyak.
-        </p>
-        <a href="/destinations/detail" class="block w-full text-center text-white bg-green-600 hover:bg-green-700 font-medium py-3 px-6 rounded-md shadow-md transition">
-          Ontdek meer
-        </a>
-        <div class="flex justify-center mt-4">
-          <button routerLink="/destination/{{destination.id}}/edit" class="bg-blue-500 text-white py-2 px-4 rounded-lg mr-2">Edit</button>
-          <button (click)="deleteDestination(destination.id)" class="bg-red-500 text-white py-2 px-4 rounded-lg">Delete</button>
+  <!-- Search Bar Section -->
+  <div class="bg-white py-6 px-4 shadow">
+    <div class="max-w-7xl mx-auto flex items-center space-x-4">
+      <input
+        type="text"
+        placeholder="Keywords"
+        class="w-full border border-gray-300 rounded-lg p-3 focus:ring focus:ring-yellow-500"
+      />
+      <input
+        type="text"
+        placeholder="Location"
+        class="w-full border border-gray-300 rounded-lg p-3 focus:ring focus:ring-yellow-500"
+      />
+      <button class="p-3 rounded-full bg-green-500 text-white hover:bg-green-600">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8 16l-4-4m0 0l4-4m-4 4h16"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Categories Section -->
+  <section class="py-10">
+    <div class="max-w-7xl mx-auto text-center">
+      <h2 class="text-3xl font-bold text-gray-800">Top Categories</h2>
+      <p class="text-gray-500 mt-2">
+        Explore the most popular categories.
+      </p>
+    </div>
+
+    <div class="mt-8 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto px-4">
+      <!-- Card 1 -->
+      <div *ngFor="let destination of destinations" class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <img class="w-full h-56 object-cover" src="https://example.com/bali.jpg" alt="Bali">
+        <div class="p-6">
+          <h2 class="text-2xl font-bold text-gray-900">{{destination.location}}</h2>
+          <p class="text-sm text-gray-500 mb-4">{{ destination.description }}</p>
+          <p class="text-gray-600 mb-6">
+            Beleef de magie van Bali: een eiland vol tempels, groene rijstvelden en serene stranden. Geniet van yoga retreats, authentieke Balinese keuken en het bruisende nachtleven van Seminyak.
+          </p>
+          <a href="/destinations/detail" class="block w-full text-center text-white bg-green-600 hover:bg-green-700 font-medium py-3 px-6 rounded-md shadow-md transition">
+            Ontdek meer
+          </a>
+          <div class="flex justify-center mt-4">
+            <button routerLink="/destination/{{destination.id}}/edit" class="bg-blue-500 text-white py-2 px-4 rounded-lg mr-2">Edit</button>
+            <button (click)="deleteDestination(destination.id)" class="bg-red-500 text-white py-2 px-4 rounded-lg">Delete</button>
+          </div>
         </div>
       </div>
     </div>
-
-    <!-- Card 2 -->
-   <!-- <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-      <img class="w-full h-56 object-cover" src="https://example.com/bahamas.jpg" alt="Bahama's">
-      <div class="p-6">
-        <h2 class="text-2xl font-bold text-gray-900">Bahama's</h2>
-        <p class="text-sm text-gray-500 mb-4">Witte stranden, turquoise wateren en levendige cultuur.</p>
-        <p class="text-gray-600 mb-6">
-          Ontsnap naar de paradijselijke Bahama’s met haar witte zandstranden, turquoise wateren en levendige cultuur. Ontdek luxe resorts, snorkelen bij kleurrijke koraalriffen en geniet van de ontspannen eilandvibe.
-        </p>
-        <a [routerLink]="['/destinations/detail']" class="block w-full text-center text-white bg-blue-600 hover:bg-blue-700 font-medium py-3 px-6 rounded-md shadow-md transition">
-          Ontdek meer
-        </a>
-      </div>
-    </div>
-
-    &lt;!&ndash; Card 3 &ndash;&gt;
-    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-      <img class="w-full h-56 object-cover" src="https://example.com/santorini.jpg" alt="Santorini">
-      <div class="p-6">
-        <h2 class="text-2xl font-bold text-gray-900">Santorini</h2>
-        <p class="text-sm text-gray-500 mb-4">Iconische witte huisjes en spectaculaire zonsondergangen.</p>
-        <p class="text-gray-600 mb-6">
-          Verken het romantische Santorini met haar iconische witte huisjes, spectaculaire zonsondergangen en azuurblauwe zee. Perfect voor een romantische vakantie of ontspannende getaway.
-        </p>
-        <a href="/destinations/detail" class="block w-full text-center text-white bg-purple-600 hover:bg-purple-700 font-medium py-3 px-6 rounded-md shadow-md transition">
-          Ontdek meer
-        </a>
-      </div>
-    </div>-->
-  </div>
-</section>
-
+  </section>
 </body>

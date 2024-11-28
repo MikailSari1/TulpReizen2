@@ -1,6 +1,7 @@
 import {Injectable, Logger, NotFoundException} from '@nestjs/common';
 import {Activities, IDestination, IGuide} from '@TulpReizen2/shared/api';
 import {BehaviorSubject} from 'rxjs';
+import {CreateDestinationDto, CreateGuideDto} from "@TulpReizen2/backend/dto";
 
 @Injectable()
 export class DestinationService {
@@ -77,16 +78,28 @@ export class DestinationService {
    * return signature - we still want to respond with the complete
    * object
    */
-  create(destination: Pick<IDestination, 'location' | 'description'>): IDestination {
+  create(destination?: CreateDestinationDto): IDestination {
     Logger.log('create', this.TAG);
-    const current = this.destinations$.value;
-    // Use the incoming data, a randomized ID, and a default value of `false` to create the new to-do
+
+    // Generate a new unique ID
+    const newId = (this.destinations$.value.length > 0
+        ? Math.max(...this.destinations$.value.map((w) => parseInt(w.id, 10))) + 1
+        : 0
+    ).toString();
+
+    // Create a new destination with provided data or fallback to defaults
     const newDestination: IDestination = {
-      ...destination,
-      id: `destination-${Math.floor(Math.random() * 10000)}`,
-      activities: Activities.Clubbing,
+      id: newId,
+      location: destination?.location || 'Unknown',
+      description: destination?.description || 'No description provided',
+      activities: destination?.activities || Activities.None,
     };
-    this.destinations$.next([...current, newDestination]);
+
+    // Add the new workout to the list
+    this.destinations$.next([...this.destinations$.value, newDestination]);
+
+    Logger.log(`Created new guide: ${JSON.stringify(newDestination)}`, this.TAG);
+
     return newDestination;
   }
 
