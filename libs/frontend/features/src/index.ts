@@ -10,3 +10,4 @@ export * from './lib/features.module';
 export * from './lib/destination/destination.service';
 export * from './lib/guides/guide.component'
 export * from './lib/guides/guide.service'
+export * from './lib/guides/editGuide/edit-guide.component'

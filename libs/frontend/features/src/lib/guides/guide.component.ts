@@ -1,16 +1,16 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RouterLink} from "@angular/router";
-import {IGuide} from "@TulpReizen2/shared/api";
-import {Subscription} from "rxjs";
-import {GuideService} from "./guide.service";
+import { RouterLink } from "@angular/router";
+import {Activities, IGuide} from "@TulpReizen2/shared/api";
+import { Subscription } from "rxjs";
+import { GuideService } from "./guide.service";
 
 @Component({
   selector: 'lib-guide',
   templateUrl: './guide.component.html',
   styleUrl: './guide.component.css',
 })
-export class GuideComponent implements OnInit, OnDestroy{
+export class GuideComponent implements OnInit, OnDestroy {
   guides: IGuide[] | null = null;
   subscription: Subscription | undefined = undefined;
 
@@ -41,4 +41,19 @@ export class GuideComponent implements OnInit, OnDestroy{
       });
     }
   }
+
+  createGuide(location: string, description: string, activities: Activities): void {
+    const newGuide: IGuide = { id: '', location, description, activities };
+    this.guideService.create(newGuide).subscribe((guide) => {
+      this.guides = [...this.guides!, guide];
+    });
+  }
+
+  updateGuide(id: string, location: string, description: string, activities: Activities): void {
+    const updatedGuide: IGuide = { id, location, description, activities };
+    this.guideService.update(id, updatedGuide).subscribe((guide) => {
+      this.guides = this.guides!.map((guide) => (guide.id === id ? guide : guide));
+    });
+  }
+
 }

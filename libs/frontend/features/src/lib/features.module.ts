@@ -4,6 +4,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
 import {RouterLink, RouterModule} from "@angular/router";
 import {GuideComponent} from "./guides/guide.component";
+import {EditGuideComponent} from "./guides/editGuide/edit-guide.component";
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -13,11 +15,13 @@ import {GuideComponent} from "./guides/guide.component";
     HttpClientModule,
     CommonModule,
     RouterModule,
-    RouterLink
+    RouterLink,
+      FormsModule
     ],
     declarations: [
          DestinationListComponent,
-         GuideComponent ],
+         GuideComponent,
+         EditGuideComponent ],
   providers: [],
 
 })

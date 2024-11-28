@@ -1,6 +1,7 @@
 import {Injectable, Logger, NotFoundException} from '@nestjs/common';
 import {Activities, IGuide} from '@TulpReizen2/shared/api';
 import {BehaviorSubject} from 'rxjs';
+import {CreateGuideDto} from "@TulpReizen2/backend/dto";
 
 
 @Injectable()
@@ -87,16 +88,28 @@ export class GuideService {
    * return signature - we still want to respond with the complete
    * object
    */
-  create(guide: Pick<IGuide, 'location' | 'description'>): IGuide {
+  create(guide?: CreateGuideDto): IGuide {
     Logger.log('create', this.TAG);
-    const current = this.guides$.value;
-    // Use the incoming data, a randomized ID, and a default value of `false` to create the new to-do
+
+    // Generate a new unique ID
+    const newId = (this.guides$.value.length > 0
+        ? Math.max(...this.guides$.value.map((w) => parseInt(w.id, 10))) + 1
+        : 0
+    ).toString();
+
+    // Create a new guide with provided data or fallback to defaults
     const newGuide: IGuide = {
-      ...guide,
-      id: `guide-${Math.floor(Math.random() * 10000)}`,
-      activities: Activities.Clubbing,
+      id: newId,
+      location: guide?.location || 'Unknown',
+      description: guide?.description || 'No description provided',
+      activities: guide?.activities || Activities.None,
     };
-    this.guides$.next([...current, newGuide]);
+
+    // Add the new workout to the list
+    this.guides$.next([...this.guides$.value, newGuide]);
+
+    Logger.log(`Created new guide: ${JSON.stringify(newGuide)}`, this.TAG);
+
     return newGuide;
   }
 
@@ -109,4 +122,25 @@ export class GuideService {
     }
     this.guides$.next(updated);
   }
+
+  update(id: string, guide: Pick<IGuide, 'location' >): IGuide {
+    Logger.log(`update(${id})`, this.TAG);
+    const currentGuides = this.guides$.value;
+    const guideIndex = currentGuides.findIndex((guide) => guide.id === id);
+
+    if (guideIndex === -1) {
+      throw new NotFoundException(`Workout with ID ${id} not found`);
+    }
+    const updatedGuide = {
+      ...currentGuides[guideIndex],
+      ...guide,
+    };
+
+    currentGuides[guideIndex] = updatedGuide;
+    this.guides$.next([...currentGuides]);
+
+    return updatedGuide;
+  }
+
+
 }

@@ -47,19 +47,19 @@ export class GuideService {
    * Get a single item from the service.
    *
    */
-  public read(id: string | null, options?: any): Observable<IGuide> {
-    console.log(`read ${this.endpoint}`);
-    return this.http
-      .get<ApiResponse<IGuide>>(this.endpoint, {
-        ...options,
-        ...httpOptions,
-      })
-      .pipe(
-        tap(console.log),
-        map((response: any) => response.results as IGuide),
-        catchError(this.handleError)
-      );
-  }
+ public read(id: string | null, options?: any): Observable<IGuide> {
+  console.log(`read ${this.endpoint}/${id}`);
+  return this.http
+    .get<ApiResponse<IGuide>>(`${this.endpoint}/${id}`, {
+      ...options,
+      ...httpOptions,
+    })
+    .pipe(
+      tap(console.log),
+      map((response: any) => response.results as IGuide),
+      catchError(this.handleError)
+    );
+}
 
   /**
    * Handle errors.
@@ -79,6 +79,43 @@ export class GuideService {
       })
       .pipe(
         tap(() => console.log(`Deleted item with id: ${id}`)),
+        catchError(this.handleError)
+      );
+  }
+
+  public create(data: IGuide | null, options?: any): Observable<IGuide> {
+    console.log(`create ${this.endpoint}`);
+
+    return this.http
+      .post<ApiResponse<IGuide>>(this.endpoint, data, {
+        ...options,
+        /*
+                ...httpOptions,
+         */
+      })
+      .pipe(
+        tap(console.log),
+        map((response: any) => response.results as IGuide),
+        catchError(this.handleError)
+      );
+  }
+
+  /**
+   * Update an item.
+   */
+  public update(data: any, options?: any): Observable<IGuide> {
+    console.log(`update ${this.endpoint}/${data?.id}`);
+
+    return this.http
+      .put<ApiResponse<IGuide>>(`${this.endpoint}/${data?.id}`, data, {
+        ...options,
+        /*
+                ...httpOptions,
+         */
+      })
+      .pipe(
+        tap(console.log),
+        map((response: any) => response.results as IGuide),
         catchError(this.handleError)
       );
   }

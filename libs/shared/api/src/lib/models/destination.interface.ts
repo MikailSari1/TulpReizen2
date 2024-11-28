@@ -13,6 +13,7 @@ export enum Activities {
   Sightseeing = 'sightseeing',
   Skiing = 'skiing',
   Surfing = 'surfing',
+  None = 'none',
 
 }
 

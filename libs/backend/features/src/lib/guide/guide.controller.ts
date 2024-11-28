@@ -1,4 +1,4 @@
-import {Controller, Delete} from '@nestjs/common';
+import {Controller, Delete, Put} from '@nestjs/common';
 import { GuideService } from './guide.service';
 import { Get, Param, Post, Body } from '@nestjs/common';
 import { IGuide } from '@TulpReizen2/shared/api';
@@ -18,6 +18,11 @@ export class GuideController {
     return this.guideService.getOne(id);
   }
 
+ /* @Post('')
+  create(@Body() data: CreateGuideDto): IGuide {
+    return this.guideService.create(data);
+  }*/
+
   @Post('')
   create(@Body() data: CreateGuideDto): IGuide {
     return this.guideService.create(data);
@@ -26,5 +31,10 @@ export class GuideController {
   @Delete(':id')
   delete(@Param('id') id: string): void {
     this.guideService.delete(id);
+  }
+
+  @Put(':id')
+  update(@Param('id') id: string, @Body() data: CreateGuideDto): IGuide {
+    return this.guideService.update(id, data);
   }
 }
