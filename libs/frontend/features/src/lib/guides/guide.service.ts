@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
 import { ApiResponse, IGuide } from '@TulpReizen2/shared/api';
 import { Injectable } from '@angular/core';
+import { environment} from "@TulpReizen2/shared/util-env";
 
 /**
  * See https://angular.io/guide/http#requesting-data-from-a-server
@@ -18,7 +19,7 @@ export const httpOptions = {
  */
 @Injectable()
 export class GuideService {
-  endpoint = 'http://localhost:3000/api/guide';
+  endpoint = environment.dataApiUrl + '/guide';
 
   constructor(private readonly http: HttpClient) {}
 
