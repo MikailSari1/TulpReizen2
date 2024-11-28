@@ -2,7 +2,11 @@
   "name": "@tulp-reizen2/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "nx run-many -t build",
+    "build:my-app": "nx run my-app:build:production",
+    "test": "nx run-many -t test"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~18.2.0",
@@ -70,5 +74,9 @@
     "typescript": "~5.5.2",
     "typescript-eslint": "^8.0.0",
     "webpack-cli": "^5.1.4"
+  },
+  "engines": {
+    "node": "^20.0.0",
+    "npm": "^10.0.0"
   }
 }
