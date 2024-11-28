@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
 import { ApiResponse, IDestination } from '@TulpReizen2/shared/api';
 import { Injectable } from '@angular/core';
+import { environment } from "@TulpReizen2/shared/util-env";
 
 /**
  * See https://angular.io/guide/http#requesting-data-from-a-server
@@ -14,7 +15,7 @@ import { Injectable } from '@angular/core';
  */
 @Injectable()
 export class DestinationService {
-  endpoint = 'http://localhost:3000/api/destination';
+  endpoint = environment.dataApiUrl + '/destination';
 
   constructor(private readonly http: HttpClient) {}
 
