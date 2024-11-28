@@ -3,6 +3,16 @@ import { Id } from './id.type';
 export enum Activities {
   Clubbing = 'clubbing',
   Sporting = 'sporting',
+  CulturalTours = 'cultural tours',
+  AdventureSports = 'adventure sports',
+  Relaxation = 'relaxation',
+  Exploration = 'exploration',
+  Hiking = 'hiking',
+  Shopping = 'shopping',
+  Watersports = 'watersports',
+  Sightseeing = 'sightseeing',
+  Skiing = 'skiing',
+  Surfing = 'surfing',
 
 }
 

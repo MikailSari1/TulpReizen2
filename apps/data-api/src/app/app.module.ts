@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import {DestinationModule} from "@TulpReizen2/backend/features";
+import {DestinationModule, GuideModule} from "@TulpReizen2/backend/features";
 
 @Module({
-  imports: [DestinationModule],
+  imports: [DestinationModule, GuideModule],
   controllers: [AppController],
   providers: [AppService],
 })
