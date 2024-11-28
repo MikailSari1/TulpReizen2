@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy frontend and backend app to Azure
+name: Build and deploy a Node.js app and an Angular app to Azure
 
 on:
   push:
@@ -12,92 +9,100 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Build and zip apps from /dist
+
     steps:
       - uses: actions/checkout@v4
 
       - name: Set up Node.js version
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '20.12.2'
 
-      - name: npm install, build, and test
+      - name: Install dependencies for frontend and backend
+        run: npm install
+
+      - name: Install Nx CLI
+        run: npm install -g nx
+
+      - name: Check Nx installation
+        run: nx --version
+
+
+      - name: Build frontend (Angular)
+        run: nx run TulpReizen2-web:build
+
+      - name: Build backend (Nest.js)
+        run: nx run data-api:build
+
+      - name: Zip frontend artifacts for deployment
         run: |
-          npm install
-          npm run build --if-present
-          # npm run test --if-present
+          cd ${GITHUB_WORKSPACE}/dist/apps/TulpReizen2-web/ && zip ${GITHUB_WORKSPACE}/frontend-app-release.zip ./* -r
 
-      - name: Zip artifacts for deployment
+      - name: Zip backend artifacts for deployment
         run: |
-          echo ${GITHUB_WORKSPACE}
-          cd ${GITHUB_WORKSPACE}/dist/apps/data-api/ && zip ${GITHUB_WORKSPACE}/data-api-release.zip ./* -r
-          cd ${GITHUB_WORKSPACE}/dist/apps/TulpReizen2-web/ && zip ${GITHUB_WORKSPACE}/TulpReizen2-web-release.zip ./* -r
+          cd ${GITHUB_WORKSPACE}/dist/apps/data-api/ && zip ${GITHUB_WORKSPACE}/backend-api-release.zip ./* -r
 
-      - name: Upload TulpReizen2-web artifact for deployment job
-        uses: actions/upload-artifact@v4
+      - name: Upload frontend artifact for deployment job
+        uses: actions/upload-artifact@v3
         with:
-          name: TulpReizen2-web
-          path: TulpReizen2-web-release.zip
+          name: frontend-app
+          path: frontend-app-release.zip
 
-      - name: Upload data-api artifact for deployment job
-        uses: actions/upload-artifact@v4
+      - name: Upload backend artifact for deployment job
+        uses: actions/upload-artifact@v3
         with:
-          name: data-api
-          path: data-api-release.zip
+          name: backend-api
+          path: backend-api-release.zip
 
-  deploy-TulpReizen2-web:
+  deploy-frontend-app:
     runs-on: ubuntu-latest
-    name: Deploy Angular Frontend
     needs: build
     environment:
       name: 'Production'
 
     steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
+      - name: Download frontend artifact from build job
+        uses: actions/download-artifact@v3
         with:
-          name: TulpReizen2-web
+          name: frontend-app
 
-      - name: Unzip artifact for deployment
-        run: unzip TulpReizen2-web-release.zip
+      - name: Unzip frontend artifact
+        run: unzip frontend-app-release.zip
 
-      - name: Deploy to static azure web app
+      - name: Deploy to Azure Static Web App
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.ANGULAR_PUBLISHTOKEN }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
-          action: 'upload'
-          app_location: '/' # App source code path
-          api_location: '' # Api source code path - optional
-          output_location: 'dist/apps/my-app' # Built app content directory - optional
-          github_id_token: ${{ steps.idtoken.outputs.result }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for GitHub integrations (e.g., PR comments)
+          action: "upload"
+          app_location: "/" # App source code path for Angular
+          api_location: "" # No API in the static web app
+          output_location: "" # Location of built app content (optional)
 
-  deploy-data-api:
+  deploy-backend-api:
     runs-on: ubuntu-latest
-    name: Deploy NestJs data-api backend
     needs: build
     environment:
       name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
+      - name: Download backend artifact from build job
+        uses: actions/download-artifact@v3
         with:
-          name: data-api
+          name: backend-api
 
-      - name: Unzip artifact for deployment
-        run: unzip data-api-release.zip
+      - name: Unzip backend artifact
+        run: unzip backend-api-release.zip
 
-      - name: Install dependencies
+      - name: Install backend dependencies
         run: npm install
 
-      - name: 'Deploy to Azure Web App'
+      - name: Deploy to Azure Web App
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@v3
+        uses: azure/webapps-deploy@v2
         with:
-          app-name: 'TulpReizen2'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.NESTJS_PUBLISHPROFILE }}
+          app-name: 'TulpReizen2' # Replace with your backend app name in Azure
+          slot-name: 'Production' # Slot for production, or change if using another slot
+          publish-profile: ${{ secrets.NEXTJS_PUBLISHPROFILE }} # Add your publish profile secret
           package: .
