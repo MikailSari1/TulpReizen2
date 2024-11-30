@@ -18,7 +18,7 @@
           "outputHashing": "all",
           "fileReplacements": [
             {
-              "replace": "libs/shared/util-env/src/environments/environment.ts",
+              "replace": "libs/shared/util-env/src/environments/environment.development.ts",
               "with": "libs/shared/util-env/src/environments/environment.production.ts"
             }
           ]
