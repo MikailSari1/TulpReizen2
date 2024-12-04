@@ -28,8 +28,8 @@
         "production": {
           "fileReplacements": [
             {
-              "replace": "libs/shared/util-env/src/environments/environment.ts",
-              "with": "libs/shared/util-env/src/environments/environment.production.ts"
+              "replace": "libs/shared/util-env/src/lib/environment.ts",
+              "with": "libs/shared/util-env/src/lib/environment.production.ts"
             }
           ],
           "budgets": [
