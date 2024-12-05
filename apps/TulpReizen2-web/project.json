@@ -25,6 +25,7 @@
         "scripts": []
       },
       "configurations": {
+
         "production": {
           "fileReplacements": [
             {
@@ -47,6 +48,12 @@
           "outputHashing": "all"
         },
         "development": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/util-env/src/lib/environment.ts",
+              "with": "libs/shared/util-env/src/lib/environment.development.ts"
+            }
+          ],
           "buildOptimizer": false,
           "optimization": false,
           "vendorChunk": true,
