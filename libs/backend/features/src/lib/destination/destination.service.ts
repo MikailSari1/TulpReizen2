@@ -2,13 +2,27 @@ import {Injectable, Logger, NotFoundException} from '@nestjs/common';
 import {Activities, IDestination, IGuide} from '@TulpReizen2/shared/api';
 import {BehaviorSubject} from 'rxjs';
 import {CreateDestinationDto, CreateGuideDto} from "@TulpReizen2/backend/dto";
+import {InjectModel} from "@nestjs/mongoose";
+import {Destination} from "./destination.schema";
+import {Model} from "mongoose";
 
 @Injectable()
 export class DestinationService {
   TAG = 'DestinationService';
+  constructor(@InjectModel(Destination.name) private destinationModel: Model<Destination>) {}
 
-  private destinations$ = new BehaviorSubject<IDestination[]>([
-    {
+  async create(createDestinationDto: CreateDestinationDto): Promise<Destination> {
+    const createdDestination = new this.destinationModel(createDestinationDto);
+    return createdDestination.save();
+  }
+
+  async findAll(): Promise<Destination[]> {
+    return this.destinationModel.find().exec();
+  }
+
+
+ /* private destinations$ = new BehaviorSubject<IDestination[]>([*/
+  /*  {
       id: '0',
       location: 'Bali',
       description: 'Beautiful place where the best sunset prevails.',
@@ -55,8 +69,8 @@ export class DestinationService {
       location: 'Maldives',
       description: 'Tropical paradise with luxurious overwater bungalows.',
       activities: Activities.Watersports,
-    },
-  ]);
+    },*/
+  /*]);
 
 
   getAll(): IDestination[] {
@@ -73,12 +87,12 @@ export class DestinationService {
     return destination;
   }
 
-  /**
+  /!**
    * Update the arg signature to match the DTO, but keep the
    * return signature - we still want to respond with the complete
    * object
-   */
-  create(destination?: CreateDestinationDto): IDestination {
+   *!/
+  /!*create(destination?: CreateDestinationDto): IDestination {
     Logger.log('create', this.TAG);
 
     // Generate a new unique ID
@@ -101,7 +115,7 @@ export class DestinationService {
     Logger.log(`Created new guide: ${JSON.stringify(newDestination)}`, this.TAG);
 
     return newDestination;
-  }
+  }*!/
 
   delete(id: string): void {
     Logger.log(`delete(${id})`, this.TAG);
@@ -130,5 +144,5 @@ export class DestinationService {
     this.destinations$.next([...currentDestinations]);
 
     return updatedDestination;
-  }
+  }*/
 }

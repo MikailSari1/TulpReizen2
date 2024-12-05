@@ -9,6 +9,7 @@ import {FormsModule} from "@angular/forms";
 import {CreateGuideComponent} from "./guides/createGuide/create-guide.component";
 import {EditDestinationComponent} from "./destination/editDestination/edit-destination.component";
 import {CreateDestinationComponent} from "./destination/createDestination/create-destination.component";
+import {DestinationDetailComponent} from "./destination/destination-detail/destination-detail.component";
 
 
 
@@ -27,7 +28,8 @@ import {CreateDestinationComponent} from "./destination/createDestination/create
          EditGuideComponent,
          CreateGuideComponent,
          EditDestinationComponent,
-         CreateDestinationComponent ],
+         CreateDestinationComponent,
+         DestinationDetailComponent ],
   providers: [],
 
 })
